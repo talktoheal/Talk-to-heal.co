@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talk To Heal — You're Not Alone, We're Here To Listen</title>
+<meta name="description" content="Talk To Heal is an anonymous emotional support and listening service. Chat or call, any hour, completely private.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --cloud-blue:#AEE1F7;
+    --dusk-lilac:#C9B8ED;
+    --blush-pink:#F8D3E3;
+    --gold-glow:#F0B84E;
+    --ink-plum:#453A5E;
+    --ink-soft:#7A6F92;
+    --paper:#FBF8FF;
+    --paper-warm:#FFF7F1;
+    --white:#FFFFFF;
+    --shadow-soft: 0 14px 40px rgba(69,58,94,0.10);
+    --shadow-lift: 0 20px 50px rgba(69,58,94,0.16);
+    --r-lg: 32px;
+    --r-md: 20px;
+    --r-sm: 14px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Karla', sans-serif;
+    color:var(--ink-plum);
+    background:var(--paper);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    line-height:1.15;
+    letter-spacing:-0.01em;
+  }
+  em{font-style:italic; color:var(--ink-plum);}
+  .container{max-width:1160px; margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    font-size:13px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--ink-soft); display:flex; align-items:center; gap:8px; margin-bottom:14px;
+  }
+  .eyebrow::before{content:''; width:22px; height:2px; background:var(--gold-glow); border-radius:2px; display:inline-block;}
+  .section{padding:96px 0;}
+  .section-warm{background:var(--paper-warm);}
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
+  .section-title{font-size:clamp(28px,4vw,40px); margin-bottom:16px;}
+  .section-sub{color:var(--ink-soft); font-size:17px;}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:9px;
+    padding:15px 30px; border-radius:100px; font-family:'Karla',sans-serif; font-weight:700; font-size:15.5px;
+    border:none; cursor:pointer; transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .btn:focus-visible{outline:3px solid var(--gold-glow); outline-offset:3px;}
+  .btn-primary{
+    background:linear-gradient(120deg, var(--dusk-lilac), var(--blush-pink));
+    color:var(--ink-plum); box-shadow:var(--shadow-soft);
+  }
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:var(--shadow-lift);}
+  .btn-outline{
+    background:transparent; color:var(--ink-plum); border:1.5px solid rgba(69,58,94,0.28);
+  }
+  .btn-outline:hover{border-color:var(--ink-plum); transform:translateY(-2px);}
+  .btn-block{width:100%;}
+  .btn-sm{padding:10px 20px; font-size:14px;}
+
+  /* Navbar */
+  .navbar{
+    position:sticky; top:0; z-index:100; background:rgba(251,248,255,0.85); backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(69,58,94,0.08);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:18px 24px; max-width:1160px; margin:0 auto;}
+  .logo{font-family:'Fraunces',serif; font-size:22px; font-weight:600; display:flex; align-items:center; gap:8px;}
+  .logo i{color:var(--gold-glow);}
+  .nav-links{display:flex; gap:32px; font-size:14.5px; font-weight:600;}
+  .nav-links a{opacity:0.75; transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;}
+  .nav-actions{display:flex; align-items:center; gap:14px;}
+  .hamburger{display:none; background:none; border:none; font-size:22px; cursor:pointer; color:var(--ink-plum);}
+  @media (max-width:860px){
+    .nav-links{
+      position:absolute; top:100%; left:0; right:0; background:var(--paper);
+      flex-direction:column; padding:20px 24px; gap:18px; border-bottom:1px solid rgba(69,58,94,0.08);
+      display:none;
+    }
+    .nav-links.open{display:flex;}
+    .hamburger{display:block;}
+    .nav-cta-desktop{display:none;}
+  }
+
+  /* Hero */
+  .hero{position:relative; padding:80px 0 60px; overflow:hidden;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:40px; align-items:center;}
+  @media (max-width:900px){.hero-grid{grid-template-columns:1fr;}}
+  .hero-eyebrow{
+    font-size:13px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft);
+    margin-bottom:18px; display:flex; align-items:center; gap:8px;
+  }
+  .hero-eyebrow i{color:var(--gold-glow);}
+  .hero h1{font-size:clamp(36px,5.4vw,58px); margin-bottom:22px;}
+  .hero h1 em{font-style:italic; background:linear-gradient(120deg,var(--dusk-lilac),var(--blush-pink)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .hero p.lead{font-size:18px; color:var(--ink-soft); max-width:480px; margin-bottom:32px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:34px;}
+  .trust-row{display:flex; gap:22px; flex-wrap:wrap;}
+  .trust-item{display:flex; align-items:center; gap:8px; font-size:13.5px; font-weight:600; color:var(--ink-soft);}
+  .trust-item i{color:var(--gold-glow); font-size:13px;}
+
+  /* Bubble field — signature element */
+  .bubble-field{position:relative; height:440px;}
+  .bubble{
+    position:absolute; border-radius:50% 50% 50% 8px; opacity:0.85;
+    animation:float 9s ease-in-out infinite;
+    box-shadow:0 10px 24px rgba(69,58,94,0.10);
+  }
+  .bubble.b2{border-radius:50% 8px 50% 50%;}
+  .bubble.b3{border-radius:8px 50% 50% 50%;}
+  @keyframes float{
+    0%,100%{transform:translateY(0) rotate(0deg);}
+    50%{transform:translateY(-22px) rotate(4deg);}
+  }
+  .glow{
+    position:absolute; width:420px; height:420px; border-radius:50%; filter:blur(60px); opacity:0.55;
+    background:radial-gradient(circle, var(--cloud-blue), transparent 70%);
+    top:-60px; right:-80px; z-index:-1;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .bubble{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+  @media (max-width:900px){.bubble-field{height:280px;}}
+
+  /* How it works */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; counter-reset:step;}
+  @media (max-width:800px){.steps{grid-template-columns:1fr;}}
+  .step-card{position:relative; padding:36px 28px; background:var(--white); border-radius:var(--r-lg); box-shadow:var(--shadow-soft);}
+  .step-num{
+    font-family:'Fraunces',serif; font-size:44px; font-weight:400; font-style:italic;
+    background:linear-gradient(120deg,var(--dusk-lilac),var(--blush-pink)); -webkit-background-clip:text; background-clip:text; color:transparent;
+    margin-bottom:14px; display:block;
+  }
+  .step-card h3{font-size:20px; margin-bottom:10px;}
+  .step-card p{color:var(--ink-soft); font-size:15px;}
+  .paid-note{
+    margin-top:36px; text-align:center; font-size:14.5px; color:var(--ink-soft);
+    background:var(--paper-warm); padding:16px 22px; border-radius:100px; display:inline-flex; gap:8px; align-items:center;
+  }
+  .paid-note-wrap{text-align:center;}
+
+  /* Features */
+  .features-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  @media (max-width:900px){.features-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:520px){.features-grid{grid-template-columns:1fr;}}
+  .feature-card{
+    padding:28px 24px; background:var(--white); border-radius:var(--r-md); box-shadow:var(--shadow-soft);
+    transition:transform .25s ease;
+  }
+  .feature-card:hover{transform:translateY(-4px);}
+  .feature-icon{
+    width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(120deg,var(--cloud-blue),var(--dusk-lilac)); color:var(--white); font-size:18px; margin-bottom:16px;
+  }
+  .feature-card h4{font-size:16.5px; font-weight:700; font-family:'Karla',sans-serif; margin-bottom:6px;}
+  .feature-card p{font-size:14px; color:var(--ink-soft);}
+
+  /* Benefits strip */
+  .benefits-strip{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  @media (max-width:800px){.benefits-strip{grid-template-columns:1fr 1fr;}}
+  @media (max-width:480px){.benefits-strip{grid-template-columns:1fr;}}
+  .benefit-item{padding:22px; border-left:2px solid var(--gold-glow); font-size:15px; color:var(--ink-plum); font-style:italic; font-family:'Fraunces',serif;}
+
+  /* Pricing */
+  .pricing-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px; align-items:stretch;}
+  @media (max-width:900px){.pricing-grid{grid-template-columns:1fr;}}
+  .price-card{
+    background:var(--white); border-radius:var(--r-lg); padding:34px 28px; box-shadow:var(--shadow-soft);
+    display:flex; flex-direction:column; border:2px solid transparent;
+  }
+  .price-card.featured{border-color:var(--gold-glow); box-shadow:var(--shadow-lift); position:relative;}
+  .price-badge{
+    position:absolute; top:-14px; left:28px; background:var(--gold-glow); color:var(--white);
+    font-size:12px; font-weight:700; padding:6px 14px; border-radius:100px; letter-spacing:0.03em;
+  }
+  .price-card h3{font-size:21px; margin-bottom:6px;}
+  .price-card .tagline{color:var(--ink-soft); font-size:14px; margin-bottom:18px;}
+  .price-amount{font-family:'Fraunces',serif; font-size:38px; margin-bottom:4px;}
+  .price-amount span{font-size:15px; font-family:'Karla',sans-serif; font-weight:600; color:var(--ink-soft);}
+  .price-strike{text-decoration:line-through; color:var(--ink-soft); font-size:19px; font-weight:600; margin-right:6px;}
+  .price-discount{color:var(--gold-glow); font-weight:700; font-size:13px; letter-spacing:0.03em; margin:2px 0 14px;}
+
+  .payment-success-overlay{
+    position:fixed; inset:0; z-index:200; background:rgba(69,58,94,0.45);
+    display:flex; align-items:center; justify-content:center; padding:20px;
+    opacity:0; pointer-events:none; transition:opacity .25s ease;
+  }
+  .payment-success-overlay.open{opacity:1; pointer-events:auto;}
+  .payment-success-card{
+    background:var(--white); border-radius:var(--r-lg); padding:36px 30px; max-width:360px; width:100%;
+    text-align:center; box-shadow:var(--shadow-lift);
+  }
+  .payment-success-card i{font-size:40px; color:var(--gold-glow); margin-bottom:14px;}
+  .payment-success-card h3{margin-bottom:8px;}
+  .payment-success-card p{color:var(--ink-soft); font-size:14.5px; margin-bottom:20px;}
+  .btn-close-overlay{
+    background:none; border:none; color:var(--ink-soft); font-size:13.5px;
+    margin-top:14px; cursor:pointer; text-decoration:underline;
+  }
+  .price-list{margin:22px 0 26px; flex-grow:1;}
+  .price-list li{display:flex; align-items:flex-start; gap:10px; font-size:14.5px; color:var(--ink-plum); margin-bottom:11px;}
+  .price-list i{color:var(--gold-glow); margin-top:3px; font-size:13px;}
+  .payment-methods{margin-top:44px; text-align:center;}
+  .payment-methods p{font-size:13px; color:var(--ink-soft); margin-bottom:14px; text-transform:uppercase; letter-spacing:0.08em; font-weight:700;}
+  .chip-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
+  .chip{padding:9px 18px; border-radius:100px; background:var(--paper-warm); font-size:13.5px; font-weight:600; color:var(--ink-plum); border:1px solid rgba(69,58,94,0.1);}
+
+  /* Testimonials */
+  .testimonial-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  @media (max-width:900px){.testimonial-grid{grid-template-columns:1fr;}}
+  .testimonial-card{background:var(--white); border-radius:var(--r-md); padding:30px 26px; box-shadow:var(--shadow-soft);}
+  .testimonial-card i.fa-quote-left{color:var(--dusk-lilac); font-size:20px; margin-bottom:14px;}
+  .testimonial-card p{font-family:'Fraunces',serif; font-style:italic; font-size:16px; margin-bottom:18px; color:var(--ink-plum);}
+  .testimonial-name{font-size:13.5px; font-weight:700; color:var(--ink-soft);}
+  .sample-note{text-align:center; font-size:12.5px; color:var(--ink-soft); margin-top:24px; opacity:0.75;}
+
+  /* Story */
+  .story{max-width:720px; margin:0 auto; text-align:center;}
+  .story p{font-size:19px; font-family:'Fraunces',serif; font-weight:400; line-height:1.6; color:var(--ink-plum);}
+
+  /* FAQ */
+  .faq-list{max-width:780px; margin:0 auto;}
+  .faq-item{border-bottom:1px solid rgba(69,58,94,0.12); padding:22px 0;}
+  .faq-q{display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:700; font-size:16px; gap:16px;}
+  .faq-q i{color:var(--gold-glow); transition:transform .25s ease; flex-shrink:0;}
+  .faq-item.open .faq-q i{transform:rotate(45deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .faq-a p{padding-top:14px; color:var(--ink-soft); font-size:15px; max-width:680px;}
+  .faq-item.open .faq-a{max-height:220px;}
+
+  /* Contact */
+  .contact-grid{display:grid; grid-template-columns:1fr 1.15fr; gap:44px;}
+  @media (max-width:860px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-item{display:flex; gap:16px; align-items:flex-start; margin-bottom:24px;}
+  .contact-icon{
+    width:44px; height:44px; border-radius:12px; background:var(--white); box-shadow:var(--shadow-soft);
+    display:flex; align-items:center; justify-content:center; color:var(--gold-glow); flex-shrink:0;
+  }
+  .contact-item h4{font-size:15.5px; font-family:'Karla',sans-serif; font-weight:700; margin-bottom:3px;}
+  .contact-item p{font-size:14.5px; color:var(--ink-soft);}
+  .callback-form{background:var(--white); border-radius:var(--r-lg); padding:34px; box-shadow:var(--shadow-soft);}
+  .callback-form h3{margin-bottom:6px; font-size:22px;}
+  .callback-form > p{color:var(--ink-soft); font-size:14.5px; margin-bottom:22px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block; font-size:13px; font-weight:700; margin-bottom:6px; color:var(--ink-plum);}
+  .field input, .field select, .field textarea{
+    width:100%; padding:13px 15px; border-radius:12px; border:1.5px solid rgba(69,58,94,0.16);
+    font-family:'Karla',sans-serif; font-size:14.5px; background:var(--paper); color:var(--ink-plum);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--dusk-lilac); border-color:transparent;}
+  .form-success{display:none; text-align:center; padding:24px 0;}
+  .form-success i{font-size:34px; color:var(--gold-glow); margin-bottom:12px;}
+
+  /* Crisis note */
+  .crisis-box{
+    background:var(--paper-warm); border:1.5px solid rgba(240,184,78,0.4); border-radius:var(--r-md);
+    padding:24px 26px; display:flex; gap:16px; align-items:flex-start; max-width:780px; margin:0 auto;
+  }
+  .crisis-box i{color:var(--gold-glow); font-size:20px; margin-top:2px;}
+  .crisis-box h4{font-size:15.5px; font-family:'Karla',sans-serif; margin-bottom:6px;}
+  .crisis-box p{font-size:14px; color:var(--ink-soft);}
+
+  /* Footer */
+  footer{background:var(--ink-plum); color:rgba(255,255,255,0.85); padding:64px 0 28px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:40px; margin-bottom:48px;}
+  @media (max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:480px){.footer-grid{grid-template-columns:1fr;}}
+  footer .logo{color:var(--white); margin-bottom:12px;}
+  footer .logo i{color:var(--gold-glow);}
+  footer p{font-size:14px; color:rgba(255,255,255,0.6); max-width:260px;}
+  footer h5{font-size:13px; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.5); margin-bottom:16px;}
+  footer ul li{margin-bottom:11px; font-size:14.5px;}
+  footer ul li a{color:rgba(255,255,255,0.8); transition:color .2s;}
+  footer ul li a:hover{color:var(--gold-glow);}
+  .social-row{display:flex; gap:12px; margin-top:18px;}
+  .social-row a{
+    width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center;
+    transition:background .2s;
+  }
+  .social-row a:hover{background:var(--gold-glow); color:var(--ink-plum);}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.14); padding-top:24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:13px; color:rgba(255,255,255,0.5);}
+
+  /* Chat widget */
+  .chat-toggle{
+    position:fixed; bottom:26px; right:26px; width:60px; height:60px; border-radius:50%;
+    background:linear-gradient(120deg,var(--dusk-lilac),var(--blush-pink)); color:var(--ink-plum);
+    display:flex; align-items:center; justify-content:center; font-size:22px; border:none; cursor:pointer;
+    box-shadow:var(--shadow-lift); z-index:200;
+  }
+  .chat-panel{
+    position:fixed; bottom:100px; right:26px; width:330px; max-width:88vw; height:440px; background:var(--white);
+    border-radius:24px; box-shadow:var(--shadow-lift); display:none; flex-direction:column; overflow:hidden; z-index:200;
+  }
+  .chat-panel.open{display:flex;}
+  .chat-head{background:linear-gradient(120deg,var(--dusk-lilac),var(--blush-pink)); padding:18px 20px; color:var(--ink-plum);}
+  .chat-head h4{font-family:'Fraunces',serif; font-size:17px;}
+  .chat-head span{font-size:12.5px; opacity:0.85;}
+  .chat-body{flex-grow:1; padding:16px; overflow-y:auto; display:flex; flex-direction:column; gap:10px;}
+  .msg{max-width:80%; padding:10px 14px; border-radius:16px; font-size:13.5px; line-height:1.4;}
+  .msg.bot{background:var(--paper-warm); align-self:flex-start; border-bottom-left-radius:4px;}
+  .msg.user{background:var(--dusk-lilac); color:var(--white); align-self:flex-end; border-bottom-right-radius:4px;}
+  .chat-input-row{display:flex; gap:8px; padding:14px; border-top:1px solid rgba(69,58,94,0.08);}
+  .chat-input-row input{flex-grow:1; border:1.5px solid rgba(69,58,94,0.15); border-radius:100px; padding:10px 16px; font-size:13.5px; font-family:'Karla',sans-serif;}
+  .chat-input-row input:focus{outline:none; border-color:var(--dusk-lilac);}
+  .chat-input-row button{width:38px; height:38px; border-radius:50%; border:none; background:var(--ink-plum); color:var(--white); cursor:pointer;}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="logo"><i class="fa-solid fa-moon"></i> Talk To Heal</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#stories">Stories</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#help-support">Help &amp; Support</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#pricing" class="btn btn-primary btn-sm nav-cta-desktop"><i class="fa-solid fa-comment-dots"></i> Start Chat</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="glow"></div>
+  <div class="container hero-grid">
+    <div data-reveal>
+      <div class="hero-eyebrow"><i class="fa-solid fa-sparkles"></i> A safe space, always open</div>
+      <h1>You're Not Alone —<br>We're Here To Listen.</h1>
+      <p class="lead">Talk To Heal is a gentle, anonymous space to say the things you've been carrying alone. No names, no judgment — just someone ready to listen, any hour of the day or night.</p>
+      <div class="hero-ctas">
+        <button class="btn btn-primary" onclick="openChat()"><i class="fa-solid fa-comment-dots"></i> Start Chat</button>
+        <a href="tel:+917037565723" class="btn btn-outline"><i class="fa-solid fa-phone"></i> Call Now</a>
+      </div>
+      <p style="font-size:14.5px; color:var(--ink-soft); margin-bottom:22px;">Or call us directly at <a href="tel:+917037565723" style="font-weight:700; color:var(--ink-plum);">+91 70375 65723</a></p>
+      <div class="trust-row">
+        <div class="trust-item"><i class="fa-solid fa-lock"></i> 100% Private &amp; Confidential</div>
+        <div class="trust-item"><i class="fa-solid fa-clock"></i> Available 24×7</div>
+        <div class="trust-item"><i class="fa-solid fa-user-secret"></i> No Names Needed</div>
+      </div>
+    </div>
+    <div class="bubble-field" aria-hidden="true">
+      <div class="bubble" style="width:110px;height:110px; top:10%; left:15%; background:var(--cloud-blue); animation-delay:0s; animation-duration:8s;"></div>
+      <div class="bubble b2" style="width:70px;height:70px; top:6%; left:60%; background:var(--blush-pink); animation-delay:1.2s; animation-duration:10s;"></div>
+      <div class="bubble b3" style="width:90px;height:90px; top:40%; left:2%; background:var(--dusk-lilac); animation-delay:2s; animation-duration:9s;"></div>
+      <div class="bubble" style="width:130px;height:130px; top:35%; left:42%; background:var(--paper-warm); animation-delay:0.6s; animation-duration:11s;"></div>
+      <div class="bubble b2" style="width:56px;height:56px; top:62%; left:20%; background:var(--gold-glow); opacity:0.5; animation-delay:1.8s; animation-duration:7s;"></div>
+      <div class="bubble b3" style="width:100px;height:100px; top:68%; left:58%; background:var(--cloud-blue); animation-delay:0.9s; animation-duration:10s;"></div>
+      <div class="bubble" style="width:64px;height:64px; top:20%; left:80%; background:var(--dusk-lilac); animation-delay:2.4s; animation-duration:8.5s;"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="callback-form" style="max-width:720px; margin:0 auto;">
+      <h3>Sometimes you just need to say it</h3>
+      <p>No names, no pressure — just a space to let your thoughts out, at your own pace.</p>
+      <!-- Demo only: not yet connected to a backend. Wire this up to real
+           storage/notifications before launch — until then, don't imply
+           anyone has actually read it. -->
+      <form id="anonForm">
+        <div class="field">
+          <textarea rows="4" placeholder="Write freely, whenever you're ready..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Send Anonymously</button>
+      </form>
+      <div class="form-success" id="anonSuccess">
+        <i class="fa-solid fa-circle-check"></i>
+        <h3>Thank you</h3>
+        <p style="color:var(--ink-soft);">Your words matter. Whenever you're ready to talk more, our listeners are just a tap away.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how-it-works">
+  <div class="container">
+    <div class="section-head center" data-reveal>
+      <div class="eyebrow" style="justify-content:center;">How It Works</div>
+      <h2 class="section-title">Three quiet steps to feeling lighter</h2>
+    </div>
+    <div class="steps">
+      <div class="step-card"><span class="step-num">01</span><h3>Share What's on Your Mind</h3><p>Type or talk about whatever's weighing on you. There's no wrong way to start, and no name required.</p></div>
+      <div class="step-card"><span class="step-num">02</span><h3>Talk to a Listener</h3><p>You're matched one-to-one with a warm, trained listener who's there simply to hear you.</p></div>
+      <div class="step-card"><span class="step-num">03</span><h3>Feel a Little Lighter</h3><p>Walk away feeling heard, calmer, and a little less alone than when you started.</p></div>
+    </div>
+    <div class="paid-note-wrap">
+      <div class="paid-note"><i class="fa-solid fa-heart" style="color:var(--gold-glow);"></i> Every chat and call is a paid, dedicated session — because your time deserves someone's full attention.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-warm" id="features">
+  <div class="container">
+    <div class="section-head center" data-reveal>
+      <div class="eyebrow" style="justify-content:center;">Features</div>
+      <h2 class="section-title">Built around your comfort</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-user-secret"></i></div><h4>Anonymous Chat</h4><p>No name, no profile — just you and a listener.</p></div>
+      <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-comments"></i></div><h4>One-to-One Listening</h4><p>Your full session, focused only on you.</p></div>
+      <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-phone-volume"></i></div><h4>Instant Call Support</h4><p>Hear a caring voice within minutes.</p></div>
+      <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-clock"></i></div><h4>Available 24×7</h4><p>Day or night, we're here when you need us.</p></div>
+      <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-heart"></i></div><h4>Emotional Comfort</h4><p>A calm, kind space to simply exhale.</p></div>
+      <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-hand-holding-heart"></i></div><h4>No Judgment, Ever</h4><p>Say it exactly as it is. You're safe here.</p></div>
+      <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-lock"></i></div><h4>Complete Privacy</h4><p>Every conversation stays fully confidential.</p></div>
+      <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-signal"></i></div><h4>Listeners Online Now</h4><p>Real people, ready and available right now.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center" data-reveal>
+      <div class="eyebrow" style="justify-content:center;">Why Talking Helps</div>
+      <h2 class="section-title">Small conversations, real relief</h2>
+    </div>
+    <div class="benefits-strip">
+      <div class="benefit-item">"Saying it out loud can lighten what's been sitting heavy."</div>
+      <div class="benefit-item">"Being heard reminds you that you matter."</div>
+      <div class="benefit-item">"A short conversation can bring real relief."</div>
+      <div class="benefit-item">"You don't have to carry it alone tonight."</div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-warm" id="pricing">
+  <div class="container">
+    <div class="section-head center" data-reveal>
+      <div class="eyebrow" style="justify-content:center;">Paid Service, Simple Pricing</div>
+      <h2 class="section-title">Every session is paid, on purpose</h2>
+      <p class="section-sub">Every call or chat session is paid to maintain quality and ensure dedicated, undivided time for every person we talk to.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Chat Session</h3>
+        <p class="tagline">A quiet space to type it all out</p>
+        <div class="price-amount"><span class="price-strike">₹299</span> ₹99 <span>/ 30 min</span></div>
+        <p class="price-discount">66% OFF</p>
+        <ul class="price-list">
+          <li><i class="fa-solid fa-check"></i> Anonymous text chat</li>
+          <li><i class="fa-solid fa-check"></i> Pick your own listener</li>
+          <li><i class="fa-solid fa-check"></i> Available 24×7</li>
+        </ul>
+        <button class="btn btn-outline btn-block" onclick="startPayment(99, 'Chat Session (30 min)')">Pay ₹99 &amp; Start Chat</button>
+      </div>
+      <div class="price-card featured">
+        <span class="price-badge">Most Chosen</span>
+        <h3>Call Session</h3>
+        <p class="tagline">Hear a warm, caring voice</p>
+        <div class="price-amount"><span class="price-strike">₹499</span> ₹199 <span>/ 30 min</span></div>
+        <p class="price-discount">60% OFF</p>
+        <ul class="price-list">
+          <li><i class="fa-solid fa-check"></i> Private one-to-one call</li>
+          <li><i class="fa-solid fa-check"></i> Fully confidential</li>
+          <li><i class="fa-solid fa-check"></i> Available 24×7</li>
+        </ul>
+        <button class="btn btn-primary btn-block" onclick="startPayment(199, 'Call Session (30 min)')">Pay ₹199 &amp; Get a Call</button>
+      </div>
+      <div class="price-card">
+        <h3>Monthly Care Plan</h3>
+        <p class="tagline">Steady support, week after week</p>
+        <div class="price-amount">₹1,999 <span>/ month</span></div>
+        <ul class="price-list">
+          <li><i class="fa-solid fa-check"></i> 15 sessions — chat or call</li>
+          <li><i class="fa-solid fa-check"></i> Priority listener matching</li>
+          <li><i class="fa-solid fa-check"></i> Gentle check-in reminders</li>
+        </ul>
+        <button class="btn btn-outline btn-block" onclick="startPayment(1999, 'Monthly Care Plan (15 sessions)')">Pay ₹1,999 &amp; Subscribe</button>
+      </div>
+    </div>
+    <div class="payment-methods">
+      <p>Accepted Payment Methods</p>
+      <div class="chip-row">
+        <span class="chip"><i class="fa-solid fa-mobile-screen"></i> UPI</span>
+        <span class="chip"><i class="fa-regular fa-credit-card"></i> Credit / Debit Card</span>
+        <span class="chip"><i class="fa-solid fa-building-columns"></i> Net Banking</span>
+        <span class="chip"><i class="fa-solid fa-wallet"></i> Wallets</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="stories">
+  <div class="container">
+    <div class="section-head center" data-reveal>
+      <div class="eyebrow" style="justify-content:center;">Real Stories</div>
+      <h2 class="section-title">How talking helped them</h2>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card"><i class="fa-solid fa-quote-left"></i><p>I didn't know who to call at 2 a.m., but within minutes, someone was just there. I felt so much lighter after.</p><div class="testimonial-name">— Ananya R.</div></div>
+      <div class="testimonial-card"><i class="fa-solid fa-quote-left"></i><p>Talking to someone who wasn't judging me lifted a weight I didn't realise I'd been carrying.</p><div class="testimonial-name">— Rohan K.</div></div>
+      <div class="testimonial-card"><i class="fa-solid fa-quote-left"></i><p>Staying anonymous made it so much easier to finally say what I'd been holding in for months.</p><div class="testimonial-name">— Priya S.</div></div>
+    </div>
+    <p class="sample-note">Sample stories shown for illustration — swap in real, consenting user testimonials before launch.</p>
+  </div>
+</section>
+
+<section class="section section-warm" id="about">
+  <div class="container story">
+    <div class="eyebrow" style="justify-content:center;">Our Story</div>
+    <p>Talk To Heal began with a simple, stubborn belief: nobody should have to sit with a heavy heart completely alone. In a world that moves fast and listens rarely, we wanted to build a gentler pause — a place where your feelings don't need explaining, your privacy is never in question, and someone is always willing to simply listen.</p>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head center" data-reveal>
+      <div class="eyebrow" style="justify-content:center;">FAQs</div>
+      <h2 class="section-title">Good to know</h2>
+    </div>
+    <div class="faq-list" id="faqList">
+      <div class="faq-item">
+        <div class="faq-q">Is Talk To Heal therapy or counselling? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>No. We're an emotional support and listening service, not a medical or therapy platform. We don't diagnose or treat anything — we simply listen, without judgment.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do I have to share my name? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>Never. You can chat or call completely anonymously, start to finish.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What happens to what I share? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>Every conversation is confidential. Nothing is shared, saved to a public profile, or traced back to you.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if I'm in a crisis or emergency? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>Talk To Heal is not an emergency service. If you're in immediate danger or having thoughts of self-harm, please call Tele MANAS at 14416 (India's free, 24×7 government mental health helpline) or dial 112 right away.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How much does a session cost? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>Chat sessions start at ₹99 and calls at ₹199 for 30 minutes (limited-time discounted pricing). See Pricing above for full details.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is this only for adults? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>Yes, Talk To Heal is intended for users aged 18 and above.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-warm">
+  <div class="container">
+    <div class="crisis-box">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <div>
+        <h4>If you're in crisis right now</h4>
+        <p>Talk To Heal offers emotional support, not emergency care. If you're in immediate danger or having thoughts of suicide, please call <strong>Tele MANAS at 14416</strong> (free, 24×7) or <strong>dial 112</strong> immediately. If you're under 18, please also reach out to a trusted adult.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="help-support">
+  <div class="container">
+    <div class="section-head center">
+      <div class="eyebrow" style="justify-content:center;">Help &amp; Support</div>
+      <h2 class="section-title">Need a hand using the site?</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">How do I start chatting with a listener? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>Tap any "Start Chat" button, or the chat bubble in the bottom-right corner of the screen.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do I start a call instead? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>Tap any "Call Now" button — it will dial our number directly from your phone.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Will I get a reply to my anonymous message? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>That box is a private space to let your thoughts out. For an actual back-and-forth conversation, please start a chat or call with a listener directly.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Something on the site isn't working — what do I do? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>Try refreshing the page and checking your internet connection first. If it still doesn't work, reach us directly on WhatsApp or call — we'll sort it out quickly.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Does this work on my phone? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>Yes, the whole site works smoothly on both mobile and desktop.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">My question isn't answered here — who do I contact? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>Reach us on WhatsApp, call, or email — see the Contact section just below, and we'll get back to you quickly.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="container contact-grid">
+    <div data-reveal>
+      <div class="eyebrow">Contact Us</div>
+      <h2 class="section-title" style="margin-bottom:28px;">Reach out, any way that feels right</h2>
+      <div class="contact-item"><div class="contact-icon"><i class="fa-solid fa-phone"></i></div><div><h4>Call</h4><p><a href="tel:+917037565723" style="color:inherit;">+91 70375 65723</a> &middot; <a href="tel:+916398106273" style="color:inherit;">+91 63981 06273</a></p></div></div>
+      <div class="contact-item"><div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div><div><h4>WhatsApp</h4><p><a href="https://wa.me/916398106273" target="_blank" rel="noopener" style="color:inherit;">+91 63981 06273</a></p></div></div>
+      <div class="contact-item"><div class="contact-icon"><i class="fa-solid fa-envelope"></i></div><div><h4>Email</h4><p><a href="mailto:hellotalktoheal@gmail.com" style="color:inherit;">hellotalktoheal@gmail.com</a></p></div></div>
+      <div class="contact-item"><div class="contact-icon"><i class="fa-solid fa-comment-dots"></i></div><div><h4>Chat on Website</h4><p><a href="#" onclick="openChat(); return false;" style="text-decoration:underline;">Open the chat box</a></p></div></div>
+    </div>
+    <div class="callback-form">
+      <h3>Request a Call Back</h3>
+      <p>Share a few details and a listener will reach out at your preferred time.</p>
+      <form id="callbackForm">
+        <div class="field"><label>Name (optional)</label><input type="text" placeholder="You can leave this blank"></div>
+        <div class="field"><label>Phone Number</label><input type="tel" required placeholder="Enter your phone number"></div>
+        <div class="field"><label>Preferred Time to Call</label><input type="text" placeholder="e.g. Today evening, 8–9 PM"></div>
+        <div class="field"><label>Anything you'd like us to know? (optional)</label><textarea rows="3" placeholder="Totally optional — share only if you'd like"></textarea></div>
+        <button type="submit" class="btn btn-primary btn-block">Request Call Back</button>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <i class="fa-solid fa-circle-check"></i>
+        <h3>Thank you</h3>
+        <p style="color:var(--ink-soft);">We've received your request. Someone will reach out at your preferred time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo"><i class="fa-solid fa-moon"></i> Talk To Heal</div>
+        <p>You're not alone. We're here to listen — anonymously, any hour of the day or night.</p>
+        <div class="social-row">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms for Paid Sessions</a></li>
+          <li><a href="#">About Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>In Crisis?</h5>
+        <p>Call Tele MANAS at <strong style="color:#fff;">14416</strong> or dial <strong style="color:#fff;">112</strong> for immediate help — free, 24×7.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Talk To Heal. All rights reserved.</span>
+      <span>Not a substitute for professional medical or emergency care.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="chat-toggle" id="chatToggle" aria-label="Open chat" onclick="toggleChat()"><i class="fa-solid fa-comment-dots"></i></button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-head">
+    <h4>Talk To Heal</h4>
+    <span>You're safe here 💜</span>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="msg bot">Hi, I'm glad you're here. What's on your mind today?</div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Type anonymously...">
+    <button onclick="sendMsg()" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<script>
+  // ---------- Razorpay Standard Checkout ----------
+  // Key ID is public and safe to expose client-side (Key Secret stays server-side only, in Netlify's env vars)
+  const RAZORPAY_KEY_ID = 'rzp_test_TWlPP8KomlkCCZ';
+
+  async function startPayment(amountInRupees, planLabel) {
+    try {
+      const orderRes = await fetch('/.netlify/functions/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: Math.round(amountInRupees * 100), receipt: 'receipt_' + Date.now() })
+      });
+      if (!orderRes.ok) throw new Error('order creation failed');
+      const order = await orderRes.json();
+
+      const options = {
+        key: RAZORPAY_KEY_ID,
+        amount: order.amount,
+        currency: order.currency,
+        name: 'Talk To Heal',
+        description: planLabel,
+        order_id: order.order_id,
+        theme: { color: '#453A5E' },
+        handler: async function (response) {
+          try {
+            const verifyRes = await fetch('/.netlify/functions/verify-payment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature
+              })
+            });
+            const verifyData = await verifyRes.json();
+            if (verifyData.verified) {
+              showPaymentSuccess(planLabel);
+            } else {
+              alert('We could not verify this payment automatically. Please WhatsApp us your payment ID so we can confirm manually: ' + response.razorpay_payment_id);
+            }
+          } catch (e) {
+            alert('Payment went through, but we could not verify it automatically. Please WhatsApp us this payment ID: ' + response.razorpay_payment_id);
+          }
+        },
+        modal: {
+          ondismiss: function () { /* user closed the checkout without paying — no action needed */ }
+        }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.on('payment.failed', function (response) {
+        alert('Payment failed: ' + (response.error && response.error.description ? response.error.description : 'please try again') + '.');
+      });
+      rzp.open();
+    } catch (err) {
+      console.error(err);
+      alert('Could not start payment right now. Please try again, or contact us directly.');
+    }
+  }
+
+  function showPaymentSuccess(planLabel) {
+    document.getElementById('paymentSuccessText').textContent =
+      'Your payment for "' + planLabel + '" is confirmed. Reach out now and we\'ll connect you right away.';
+    document.getElementById('paymentSuccessOverlay').classList.add('open');
+  }
+
+  // Mobile nav
+  document.getElementById('hamburger').addEventListener('click', ()=>{
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click', ()=>{
+    document.getElementById('navLinks').classList.remove('open');
+  }));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q=>{
+    q.addEventListener('click', ()=>{
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // Chat widget
+  function toggleChat(){ document.getElementById('chatPanel').classList.toggle('open'); }
+  function openChat(){ document.getElementById('chatPanel').classList.add('open'); }
+  function sendMsg(){
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if(!text) return;
+    const body = document.getElementById('chatBody');
+    const userMsg = document.createElement('div');
+    userMsg.className = 'msg user';
+    userMsg.textContent = text;
+    body.appendChild(userMsg);
+    input.value = '';
+    body.scrollTop = body.scrollHeight;
+    setTimeout(()=>{
+      const botMsg = document.createElement('div');
+      botMsg.className = 'msg bot';
+      botMsg.textContent = "Thank you for sharing that with me. A listener will be with you in just a moment... 💛";
+      body.appendChild(botMsg);
+      body.scrollTop = body.scrollHeight;
+    }, 900);
+  }
+  document.getElementById('chatInput').addEventListener('keydown', (e)=>{ if(e.key==='Enter') sendMsg(); });
+
+  // Callback form mock submit
+  document.getElementById('callbackForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    this.style.display='none';
+    document.getElementById('formSuccess').style.display='block';
+  });
+
+  // Anonymous share form — demo only, not yet connected to a backend.
+  // Wire this up to real storage/notifications before launch so a person
+  // actually receives these messages.
+  document.getElementById('anonForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    this.style.display='none';
+    document.getElementById('anonSuccess').style.display='block';
+  });
+</script>
+<div class="payment-success-overlay" id="paymentSuccessOverlay">
+  <div class="payment-success-card">
+    <i class="fa-solid fa-circle-check"></i>
+    <h3>Payment successful 🎉</h3>
+    <p id="paymentSuccessText">You're all set. Reach out now and we'll connect you right away.</p>
+    <a href="tel:+917037565723" class="btn btn-primary btn-block"><i class="fa-solid fa-phone"></i> Call Now</a>
+    <a href="https://wa.me/916398106273" target="_blank" rel="noopener" class="btn btn-outline btn-block" style="margin-top:10px;"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
+    <button class="btn-close-overlay" onclick="document.getElementById('paymentSuccessOverlay').classList.remove('open')">Close</button>
+  </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</body>
+</html>

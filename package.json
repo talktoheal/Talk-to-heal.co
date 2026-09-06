@@ -1,0 +1,9 @@
+{
+  "name": "talk-to-heal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Talk To Heal website with Razorpay Standard Checkout via Netlify Functions",
+  "dependencies": {
+    "razorpay": "^2.9.4"
+  }
+}
