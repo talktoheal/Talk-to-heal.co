@@ -699,8 +699,8 @@
 <script>
   // ---------- Razorpay Standard Checkout ----------
   // Key ID is public and safe to expose client-side (Key Secret stays server-side only, in Netlify's env vars)
-  const rzp_live_TsVI3jwIHbmjqe = 'rzp_test_TWlPP8KomlkCCZ';
-
+  
+const RAZORPAY_KEY_ID = 'rzp_live_TsVI3jwIHbmjqe';
   async function startPayment(amountInRupees, planLabel) {
     try {
       const orderRes = await fetch('/.netlify/functions/create-order', {
